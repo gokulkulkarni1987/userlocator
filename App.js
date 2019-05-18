@@ -5,12 +5,13 @@
  * @format
  * @flow
  */
-
+import { Provider } from 'react-redux';
 import React from 'react';
 import { createStackNavigator, createAppContainer, createDrawerNavigator } from "react-navigation";
 import HomeScreen from "./src/screens/home/HomeScreen";
 import ListUserScreen from "./src/screens/user/ListUserScreen";
 import HeaderView from "./src/common/HeaderView";
+import configureStore from './configureStore';
 
 const MainViewNavigator = createStackNavigator({
   Home: {
@@ -36,7 +37,7 @@ const ListViewNavigator = createStackNavigator({
   }
 })
 
-const DrawerNavigator = createDrawerNavigator({
+const DrawerNavigator = createAppContainer(createDrawerNavigator({
   Home: {
     screen: MainViewNavigator,
   },
@@ -48,6 +49,26 @@ const DrawerNavigator = createDrawerNavigator({
   contentOptions: {
     activeTintColor: '#e91e63'
   },
-});
+}));
 
-export default createAppContainer(DrawerNavigator);
+class App extends React.Component {
+  
+  constructor() {
+    super();
+    this.state = {
+      store: configureStore(),
+    };
+  }
+
+  render() {
+    return (
+      <Provider
+        store={this.state.store}
+      >
+        <DrawerNavigator />
+      </Provider>
+    );
+  }
+}
+
+export default App;

@@ -35,7 +35,6 @@ class HomeScreen extends Component {
 
   componentWillMount() {
     navigator.geolocation.getCurrentPosition(location => {
-      console.log('this is the locations: ', location);
       const initialRegionDelta = getMapGeoDelta();
       this.setState({
         location: {
