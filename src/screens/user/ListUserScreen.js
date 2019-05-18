@@ -20,6 +20,7 @@ class ListUserScreen extends Component {
   renderItem({ item }) {
     return (
       <UserDetials
+        key={item.id}
         user={item}
       />
     );
