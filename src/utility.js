@@ -16,3 +16,8 @@ export const getMapGeoDelta = () => {
   const longitudeDelta = latitudeDelta * (screenWidth / screenHeight);
   return { latitudeDelta, longitudeDelta };
 };
+
+export const getRandomInRange = (from, to, fixed) => {
+  return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+  // .toFixed() returns string, so ' * 1' is a trick to convert to number
+}
